@@ -50,7 +50,7 @@ public final class TeXCommands
   public static final String CMD_TAB_P_WIDTH = "p{width}";
   public static final String CMD_TAB_NEXT_COL = "&";
   public static final String CMD_TAB_NEW_ROW = CMD_LINE_BREAK;
-  public static final String CMD_TAB_HORIZ_LINE = "\\hline";
+  public static final String CMD_TAB_HORIZ_LINE = "\\hline ";
   public static final String CMD_TAB_ALIGN_COL_LEFT = "l";
   public static final String CMD_TAB_ALIGN_COL_RIGHT = "r";
   public static final String CMD_TAB_ALIGN_COL_CENTER = "c";

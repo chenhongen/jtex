@@ -23,22 +23,51 @@ public class Test {
 	public static void main(String[] args) throws TeXIOException, TeXInvalidFileException, TeXException {
 		ITClass c = new TeXClassImpl(TeXClassEnum.LTX_DOC);
 		TeXPackageCollectionImpl pc = new TeXPackageCollectionImpl();
-		// ��沼��
+		
+		// [utf8]{inputenc}
+		pc.addPackage(new TeXPackageImpl("inputenc", "utf8"));
+		// 横版
 		pc.addPackage(new TeXPackageImpl("geometry", "landscape"));
 		
-		// �����ĵ�
+		// 创建文件
 		TeXDocument doc = new TeXDocument("C:/Users/Administrator/Desktop/t.tex", c, pc);
 		
-		// ������
+		doc.getWriter().writel(TeXCommands.documentClass(TeXClassEnum.ARTICLE.toString(), null));
+		
+		// 序
 	    doc.createPreamble();
-	    
+
 	    // 
+	    ITItem centerEnvironment = new TeXEnvironmentImpl(TeXEnvEnum.CENTER);
 	    ITItem tableEnvironment = new TeXEnvironmentImpl(TeXEnvEnum.TABLE);
+	    doc.getWriter().writel(centerEnvironment.head());
 	    doc.getWriter().writel(tableEnvironment.head());
-	    doc.getWriter().writel(TeXCommands.beginTabular(null, "|c|c|c|"));
-	    doc.getWriter().writel(TeXCommands.CMD_TAB_HORIZ_LINE + 1 +
-	    		TeXCommands.CMD_TAB_NEXT_COL + 2 +
-	    		TeXCommands.CMD_TAB_NEXT_COL + 3 + 
+	    doc.getWriter().writel(TeXCommands.beginTabular(null, "|l|l|l|l|"));
+	    doc.getWriter().writel(TeXCommands.CMD_TAB_HORIZ_LINE + "编写：" +
+	    		TeXCommands.CMD_TAB_NEXT_COL + "" +
+	    		TeXCommands.CMD_TAB_NEXT_COL + "产品代号：" + 
+	    		TeXCommands.CMD_TAB_NEXT_COL + "" +
+	    		TeXCommands.CMD_LINE_BREAK +
+	    		TeXCommands.CMD_TAB_HORIZ_LINE +
+	    		
+	    		TeXCommands.CMD_TAB_HORIZ_LINE + "校对：" +
+	    		TeXCommands.CMD_TAB_NEXT_COL + "" +
+	    		TeXCommands.CMD_TAB_NEXT_COL + "产品图号：" + 
+	    		TeXCommands.CMD_TAB_NEXT_COL + "" +
+	    		TeXCommands.CMD_LINE_BREAK +
+	    		TeXCommands.CMD_TAB_HORIZ_LINE +
+	    		
+	    		TeXCommands.CMD_TAB_HORIZ_LINE + "审核：" +
+	    		TeXCommands.CMD_TAB_NEXT_COL + "" +
+	    		TeXCommands.CMD_TAB_NEXT_COL + "产品名称：" + 
+	    		TeXCommands.CMD_TAB_NEXT_COL + "" +
+	    		TeXCommands.CMD_LINE_BREAK +
+	    		TeXCommands.CMD_TAB_HORIZ_LINE +
+	    		
+	    		TeXCommands.CMD_TAB_HORIZ_LINE + "批准：" +
+	    		TeXCommands.CMD_TAB_NEXT_COL + "" +
+	    		TeXCommands.CMD_TAB_NEXT_COL + "产品编号：" + 
+	    		TeXCommands.CMD_TAB_NEXT_COL + "" +
 	    		TeXCommands.CMD_LINE_BREAK +
 	    		TeXCommands.CMD_TAB_HORIZ_LINE);
 	    doc.getWriter().writel(TeXCommands.endTabular());
@@ -51,6 +80,7 @@ public class Test {
 //	    		,"\\hline"
 //	    		,"\\end{tabular}")
 	    doc.getWriter().writel(tableEnvironment.foot());
+	    doc.getWriter().writel(centerEnvironment.foot());
 	    
 	    doc.close();
 	}
